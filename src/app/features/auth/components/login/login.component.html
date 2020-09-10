@@ -1,1 +1,54 @@
-<p>login works!</p>
+<!-- Material form login -->
+<mdb-card class="z-depth-2 card">
+
+  <div class=" text-center py-4">
+    <h4>
+      <strong> Đăng nhập</strong>
+    </h4>
+  </div>
+
+
+  <!--Card content-->
+  <mdb-card-body class="px-lg-5 pt-0">
+    <!-- Form -->
+    <form  class="text-center" style="color: #757575;" [formGroup]="loginForm" (ngSubmit)="onLogin()">
+
+      <!-- Email -->
+      <div class="md-form">
+        <input mdbValidate  type="email" id="email" class="form-control"  mdbInput formControlName="username">
+        <label for="email">E-mail / Username</label>
+        <mdb-error *ngIf="username.invalid &&  (username.touched || username.dirty)">Nhập email hoặc username</mdb-error>
+      </div>
+
+      <!-- Password -->
+      <div class="md-form">
+        <input mdbValidate [validateSuccess]="false" type="password" id="password" class="form-control" mdbInput formControlName="password" >
+        <label for="password">Mật khẩu</label>
+        <mdb-error *ngIf="password.hasError('required') && password.touched">Chưa nhập mật khẩu</mdb-error>
+        <mdb-error *ngIf="password.invalid && password.dirty && !password.hasError('required')">Mật khẩu 6 ký tự trở lên</mdb-error>
+      </div>
+      <div class="alert alert-danger" role="alert" *ngIf="error">
+        Sai tài khoản hoặc mật khẩu
+      </div>
+      <div class="alert alert-primary" role="alert" *ngIf="loginSuccess">
+        Đăng nhập thành công
+      </div>
+      <!-- Sign in button -->
+      <button *ngIf="!loading" mdbBtn color="success" block="true"
+              mdbWavesEffect type="submit" [disabled]="loginForm.status !== 'VALID'">Đăng nhập</button>
+      <!--            [disabled]="loginForm.status !== 'VALID'"-->
+      <button *ngIf="loading" mdbBtn color="success" block="true" disabled>
+        <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+        <span class="sr-only">Loading...</span>
+      </button>
+      <hr>
+
+      <!-- Register -->
+
+    </form>
+    <!-- Form -->
+
+  </mdb-card-body>
+
+</mdb-card>
+<!-- Material form login -->
