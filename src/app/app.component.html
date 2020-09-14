@@ -1,9 +1,6 @@
 <app-navbar ></app-navbar>
-<main [ngClass]="{'py-0 px-0 my-0 mx-0 mx-lg-5': isLogin}" >
-
-  <div [ngClass]="{'mt-5': isLogin}" >
-    <router-outlet></router-outlet>
-  </div>
+<main class="py-0 px-0 my-0 mx-0 mx-lg-5" >
+   <router-outlet></router-outlet>
 </main>
 
-<app-footer *ngIf="isLogin"></app-footer>
+<app-footer></app-footer>
