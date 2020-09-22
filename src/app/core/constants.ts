@@ -9,3 +9,14 @@ export const frontendUrl = {
   AUTH: 'auth',
   NOT_FOUND: '**'
 };
+export const ApiUrl = {
+  GET_LIST_PRODUCT: 'product-list',
+  GET_LIST_CATEGORY: 'category-list',
+  GET_LIST_USER: 'user-list',
+  GET_LIST_CUSTOMER: 'customer-list'
+
+}
+export const LocalStorage = {
+  CART: 'cart',
+  USER_INFO: 'user-info',
+}

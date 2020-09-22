@@ -6,6 +6,7 @@ import {FeatureModule} from './features/feature.module';
 import {CoreModule} from './core/core.module';
 import {SharedModule} from './shared/shared.module';
 import {RouterModule} from '@angular/router';
+import { HttpClientModule} from "@angular/common/http";
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import {RouterModule} from '@angular/router';
     FeatureModule,
     CoreModule,
     SharedModule,
-    RouterModule
+    RouterModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

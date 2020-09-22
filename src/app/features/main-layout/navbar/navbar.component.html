@@ -1,24 +1,24 @@
 <header>
 
   <!-- Sidebar -->
-  <div class="sidebar-fixed position-fixed">
+  <div class="sidebar-fixed position-fixed fixed-top">
 
     <a class="logo-wrapper waves-effect">
       <img src="https://mdbootstrap.com/img/Marketing/general/logo/small/mdb-angular.png" class="img-fluid" alt="">
     </a>
 
-    <div class="list-group list-group-flush">
+    <div class="list-group list-group-flush" *ngIf="user">
 
-      <a routerLink="{{dashboardUrl}}" routerLinkActive="active" class="list-group-item list-group-item-action waves-effect">
+      <a routerLink="{{routing.DASHBOARD}}" routerLinkActive="active" class="list-group-item list-group-item-action waves-effect">
         <mdb-icon fas icon="chart-pie" class="mr-2"></mdb-icon>Thống kê
       </a>
-      <a routerLink="{{customerUrl}}" routerLinkActive="active" class="list-group-item list-group-item-action waves-effect">
-        <mdb-icon fas icon="users" class="mr-2"></mdb-icon>Quản lý khách hàng</a>
-      <a routerLink="{{sellingUrl}}" routerLinkActive="active" class="list-group-item list-group-item-action waves-effect">
+      <a routerLink="{{routing.SELLING}}" routerLinkActive="active" class="list-group-item list-group-item-action waves-effect">
         <mdb-icon fas icon="store" class="mr-2"></mdb-icon>Bán hàng</a>
-      <a routerLink="{{cdManagerUrl}}" routerLinkActive="active" class="list-group-item list-group-item-action waves-effect">
+      <a routerLink="{{routing.CD_MANAGER}}" routerLinkActive="active" class="list-group-item list-group-item-action waves-effect">
         <mdb-icon fas icon="list" class="mr-2"></mdb-icon>Quản lý đĩa</a>
-      <a routerLink="{{userUrl}}" routerLinkActive="active" class="list-group-item list-group-item-action waves-effect">
+      <a routerLink="{{routing.CUSTOMER_MANAGER}}" routerLinkActive="active" class="list-group-item list-group-item-action waves-effect">
+        <mdb-icon fas icon="users" class="mr-2"></mdb-icon>Quản lý khách hàng</a>
+      <a routerLink="{{routing.USER_MANAGER}}" routerLinkActive="active" class="list-group-item list-group-item-action waves-effect">
         <mdb-icon fas icon="user-friends" class="mr-2"></mdb-icon>Nhân viên</a>
 
     </div>
@@ -32,7 +32,7 @@
     <!-- Navbar brand -->
     <logo class="ml-3">
       <a class="navbar-brand" href="https://mdbootstrap.com/angular/angular-bootstrap-getting-started/">
-        <strong class="blue-text">MDB</strong>
+        <strong class="blue-text">VCL</strong>
       </a>
     </logo>
 
@@ -41,19 +41,10 @@
 
       <!-- Links -->
       <ul class="navbar-nav mr-auto ">
-        <li class="nav-item active">
-          <a class="nav-link" mdbWavesEffect>Home
+        <li class="nav-item" >
+          <a class="nav-link" routerLink="/dashboard" mdbWavesEffect>Phần mềm cho thuê băng đĩa
             <span class="sr-only">(current)</span>
           </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="https://mdbootstrap.com/angular/angular-bootstrap-getting-started/" target="_blank" mdbWavesEffect>About MDB</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="https://mdbootstrap.com/angular/getting-started/" target="_blank" mdbWavesEffect>Free download</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="https://mdbootstrap.com/angular/angular-tutorial/" target="_blank" mdbWavesEffect>Free tutorials</a>
         </li>
       </ul>
       <!-- Links -->
@@ -62,24 +53,9 @@
       <ul class="navbar-nav nav-flex-icons">
 
         <li class="nav-item">
-          <a href="https://www.facebook.com/mdbootstrap" class="nav-link" target="_blank" mdbWavesEffect>
-            <mdb-icon fab icon="facebook-f"></mdb-icon>
+          <a routerLink="/{{routing.AUTH}}/{{routing.LOGIN}}" class="nav-link" mdbWavesEffect>
+            <mdb-icon fas icon="sign-out-alt"></mdb-icon> Đăng xuất
           </a>
-        </li>
-        <li class="nav-item">
-          <a href="https://twitter.com/MDBootstrap" class="nav-link" target="_blank" mdbWavesEffect>
-            <mdb-icon fab icon="twitter"></mdb-icon>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a href="https://github.com/mdbootstrap/bootstrap-material-design" class="nav-link border border-light"
-             target="_blank" mdbWavesEffect>
-            <mdb-icon fab icon="github" class="mr-2"></mdb-icon>MDB GitHub
-          </a>
-        </li>
-        <li class="nav-item">
-          <a href="https://mdbootstrap.com/products/angular-ui-kit/" class="ml-1 nav-link border border-light rounded" mdbWavesEffect>
-            <mdb-icon far icon="gem" class=" left"></mdb-icon> Go Pro</a>
         </li>
       </ul>
     </links>

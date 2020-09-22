@@ -1,1 +1,96 @@
-<p>dashboard works!</p>
+<div class="card">
+  <div class="card-header">
+    <app-dashboard-head></app-dashboard-head>
+  </div>
+  <div class="card-body">
+    <div class="row wow fadeIn mt-5">
+
+      <!--Grid column-->
+      <div class="col-md-9 mb-4">
+
+        <!--Card-->
+        <mdb-card>
+
+          <!--Card content-->
+          <mdb-card-body>
+
+            <div style="display: block">
+              <canvas mdbChart [chartType]="chart1Type" [datasets]="chartDatasets" [labels]="chartLabels"
+                      [colors]="chartColors" [options]="chartOptions"
+                      [legend]="true">
+              </canvas>
+            </div>
+          </mdb-card-body>
+
+        </mdb-card>
+        <!--/.Card-->
+
+      </div>
+      <!--Grid column-->
+
+      <!--Grid column-->
+      <div class="col-md-3 mb-4">
+
+        <!--Card-->
+        <mdb-card class="mb-4">
+
+          <!-- Card header -->
+          <div class="card-header text-center">
+            Pie chart
+          </div>
+
+          <!--Card content-->
+          <mdb-card-body>
+
+            <div style="display: block">
+              <canvas mdbChart [chartType]="chart2Type" [datasets]="chartDatasets" [labels]="chartLabels"
+                      [colors]="chartColors" [options]="chartOptions"
+                      [legend]="true">
+              </canvas>
+            </div>
+          </mdb-card-body>
+
+        </mdb-card>
+        <!--/.Card-->
+
+        <!--Card-->
+        <mdb-card class="mb-4">
+
+          <!--Card content-->
+          <mdb-card-body>
+
+            <!-- List group links -->
+            <div class="list-group list-group-flush">
+              <a class="list-group-item list-group-item-action waves-effect">Sales
+                <mdb-badge success="true" pill="true" class="pull-right">22%
+                  <mdb-icon fas icon="arrow-up" class="ml-1"></mdb-icon>
+                </mdb-badge>
+              </a>
+              <a class="list-group-item list-group-item-action waves-effect">Traffic
+                <mdb-badge danger="true" pill="true" class="pull-right">5%
+                  <mdb-icon fas icon="arrow-down" class="ml-1"></mdb-icon>
+                </mdb-badge>
+              </a>
+              <a class="list-group-item list-group-item-action waves-effect">Orders
+                <mdb-badge primary="true" pill="true" class="pull-right">14</mdb-badge>
+              </a>
+              <a class="list-group-item list-group-item-action waves-effect">Issues
+                <span class="badge badge-primary badge-pill pull-right">123</span>
+              </a>
+              <a class="list-group-item list-group-item-action waves-effect">Messages
+                <mdb-badge primary="true" pill="true" class="pull-right">8</mdb-badge>
+              </a>
+            </div>
+            <!-- List group links -->
+
+          </mdb-card-body>
+
+        </mdb-card>
+        <!--/.Card-->
+
+      </div>
+      <!--Grid column-->
+
+    </div>
+  </div>
+</div>

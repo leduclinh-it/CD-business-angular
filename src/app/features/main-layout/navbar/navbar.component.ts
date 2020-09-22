@@ -7,12 +7,8 @@ import * as CONST from '../../../core/constants';
 })
 export class NavbarComponent implements OnInit {
 
-  basicUrl = CONST.frontendUrl;
-  dashboardUrl = this.basicUrl.DASHBOARD;
-  customerUrl = this.basicUrl.CUSTOMER_MANAGER;
-  sellingUrl = this.basicUrl.SELLING;
-  cdManagerUrl = this.basicUrl.CD_MANAGER;
-  userUrl = this.basicUrl.USER_MANAGER;
+  routing = CONST.frontendUrl;
+  user = true;
   constructor() { }
 
   ngOnInit(): void {

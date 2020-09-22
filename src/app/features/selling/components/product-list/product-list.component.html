@@ -1,0 +1,79 @@
+
+
+<div class="card">
+  <div class="card-header">
+    <div class="row mt-3">
+      <div class="col-md-4">
+        <label>Thể loại</label>
+        <select class="browser-default custom-select"  [(ngModel)]="txtCategory" (ngModelChange)="searchProduct()" >
+          <option *ngFor="let ctgr of categoryList" value="{{ctgr.id}}">{{ctgr.name}}</option>
+        </select>
+      </div>
+      <div class="col-md-4 ">
+        <div class="md-form ">
+          <input mdbInput type="text" id="codeProduct" [(ngModel)]="txtCode" (keyup)="searchProduct()" class="form-control">
+          <label for="codeProduct" class="">Tìm theo mã</label>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="md-form">
+          <input mdbInput type="text" id="nameProduct" [(ngModel)]="txtName" (keyup)="searchProduct()" class="form-control">
+          <label for="nameProduct" class="">Tìm theo tên</label>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="card-body">
+    <table mdbTable #tableEl="mdbTable" >
+      <thead class="sticky-top">
+      <tr>
+        <th [mdbTableSort]="elements"
+            sortBy="id" scope="col">{{headElements[0] | titlecase}}
+          <mdb-icon fas icon="sort"></mdb-icon>
+        </th>
+        <th [mdbTableSort]="elements" width="20%"
+            sortBy="name" scope="col">{{headElements[1] | titlecase}}
+          <mdb-icon fas icon="sort"></mdb-icon>
+        </th>
+        <th [mdbTableSort]="elements"
+            sortBy="code" scope="col">{{headElements[2] | titlecase}}
+          <mdb-icon fas icon="sort"></mdb-icon>
+        </th>
+        <th [mdbTableSort]="elements"
+            sortBy="price" scope="col">{{headElements[3] | titlecase}}
+          <mdb-icon fas icon="sort"></mdb-icon>
+        </th>
+        <th [mdbTableSort]="elements" width="20%" class="text-center"
+            sortBy="quantity" scope="col">{{headElements[4] | titlecase}}
+          <mdb-icon fas icon="sort"></mdb-icon>
+        </th>
+        <th  class="text-center"
+             scope="col">{{headElements[5] | titlecase}}
+        </th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let el of elements; let i = index">
+        <th *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex"
+            scope="row">{{el.id}}</th>
+
+        <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">{{el.name}}</td>
+        <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">{{el.code}}</td>
+        <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">{{el.price}}.000đ</td>
+        <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex" class="text-center">{{el.quantity}}</td>
+        <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex" class="text-center">
+          <button type="button"  size="sm" mdbBtn color="primary" (click)="detailProduct(el)" mdbWavesEffect><mdb-icon fas icon="info"></mdb-icon></button>
+        </td>
+      </tr>
+      </tbody>
+      <tfoot class="grey lighten-5 w-100">
+      <tr>
+        <td colspan="6">
+          <mdb-table-pagination [tableEl]="tableEl" [searchDataSource]="elements"></mdb-table-pagination>
+        </td>
+      </tr>
+      </tfoot>
+    </table>
+
+  </div>
+</div>

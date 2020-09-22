@@ -3,6 +3,7 @@ import {SharedModule} from '../shared/shared.module';
 import { FooterComponent } from './main-layout/footer/footer.component';
 import {AppRoutes} from './feature.routing';
 import { NavbarComponent } from './main-layout/navbar/navbar.component';
+import {BrowserModule} from "@angular/platform-browser";
 
 @NgModule({
   declarations: [FooterComponent, NavbarComponent],
@@ -12,7 +13,8 @@ import { NavbarComponent } from './main-layout/navbar/navbar.component';
   ],
   imports: [
     SharedModule,
-    AppRoutes
+    AppRoutes,
+    BrowserModule
   ]
 })
 export class FeatureModule {}

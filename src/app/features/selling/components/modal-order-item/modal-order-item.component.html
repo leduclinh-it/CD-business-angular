@@ -1,0 +1,66 @@
+<div class="container p-2">
+  <div class="card">
+    <div class="card-header">
+      <h4>{{productDetail.name}}</h4>
+    </div>
+    <form [formGroup]="orderItemForm" class="card-body">
+      <div class="row">
+        <div class="col-md-3">
+          <img class="img-thumbnail" style="width: 100px" src="https://www.elleman.vn/wp-content/uploads/2018/12/26/phim-hanh-dong-elle-man-1-475x699.jpg">
+        </div>
+        <div class="col-md-3">
+          <div class="md-form">
+            <input mdbInput type="text" id="codeProduct" value="{{productDetail.code}}" class="form-control disabled">
+            <label for="codeProduct" class="">Mã sản phẩm</label>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="md-form">
+            <input mdbInput type="text" id="quantityProduct" value="{{productDetail.quantity}}" class="form-control disabled">
+            <label for="quantityProduct" class="">Số lượng</label>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="md-form">
+            <input mdbInput type="text" id="price" value="{{productDetail.price}}.000đ" class="form-control disabled">
+            <label for="price" class="">Giá</label>
+          </div>
+        </div>
+      </div>
+      <div class="row mt-5">
+        <div class="col-md-6">
+          <div class="md-form mt-0">
+            <input mdbInput type="date" id="date" [(ngModel)]="dateCurrent" formControlName="dateCurrent" class="form-control" mdbValidate>
+            <label for="date" class="">Ngày thuê</label>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="md-form mt-0">
+            <input mdbInput type="date" id="dateReturn" formControlName="dateReturn" class="form-control" mdbValidate>
+            <label for="dateReturn" class="">Ngày trả</label>
+            <mdb-error class="mt-1" *ngIf="f.dateReturn?.touched && f.dateReturn?.errors?.required">Chưa chọn ngày trả</mdb-error>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="md-form mt-0">
+            <input mdbInput type="number" formControlName="quantity" id="quantity" class="form-control" mdbValidate (keyup)="validateQuantity()">
+            <label for="quantity" class="">Số lượng thuê</label>
+            <mdb-error class="mt-1" *ngIf="f.quantity?.touched && f.quantity?.errors?.required">Chưa nhập số lượng cần thuê</mdb-error>
+            <mdb-error class="mt-1" *ngIf="quantityError">Số lượng trong cửa hàng còn {{productDetail.quantity}}</mdb-error>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="md-form mt-0">
+            <input mdbInput type="text" formControlName="price" id="priceprd" class="form-control" mdbValidate>
+            <label for="priceprd" class="">Tổng tiền</label>
+            <mdb-error class="mt-1" *ngIf="f.price?.touched && f.price?.errors?.required">Chưa nhập số tiền</mdb-error>
+          </div>
+        </div>
+      </div>
+
+    </form>
+    </div>
+    <div class="card-footer">
+      <button type="button" block="true" size="sm" mdbBtn color="primary" mdbWavesEffect [disabled]="this.orderItemForm.status === 'INVALID'" (click)="onAddOrder()">Thêm vào giỏ hàng</button>
+    </div>
+  </div>

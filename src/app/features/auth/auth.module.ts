@@ -6,7 +6,6 @@ import { RegisterComponent } from './components/register/register.component';
 import {RouterModule, Routes} from '@angular/router';
 import * as CONST from '../../core/constants';
 import {ReactiveFormsModule} from "@angular/forms";
-import {CommonModule} from "@angular/common";
 const routes: Routes = [
   {path: '', component: AuthComponent, children: [
       {path: CONST.frontendUrl.LOGIN, component: LoginComponent},
@@ -15,7 +14,7 @@ const routes: Routes = [
     ]}
 ];
 @NgModule({
-  imports: [SharedModule, RouterModule.forChild(routes), ReactiveFormsModule, CommonModule],
+  imports: [SharedModule, RouterModule.forChild(routes), ReactiveFormsModule],
   exports: [],
   declarations: [AuthComponent, LoginComponent, RegisterComponent]
 })

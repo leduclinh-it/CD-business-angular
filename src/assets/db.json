@@ -1,0 +1,106 @@
+{
+  "user": {
+    "id": 1,
+    "firstname": "Linh",
+    "lastname": "Le Duc",
+    "username": "leduclinh65@gmail.com",
+    "password": "Duclinh09",
+    "role": "SYS_ADMIN",
+    "authorities": ["SYS_ADMIN","USER"],
+    "email": "leduclinh65@gmail.com"
+  },
+  "product-list": [
+    {
+      "id": 1,
+      "name": "Chiến lang",
+      "price": 20,
+      "quantity": 10,
+      "image": "image1",
+      "description": "Đĩa phim hành động China",
+      "code": "CL123",
+      "category": {
+        "id": 1,
+        "name": "Đĩa phim"
+      }
+    },
+    {
+      "id": 2,
+      "name": "King Kong",
+      "price": 40,
+      "quantity": 10,
+      "image": "image2",
+      "description": "Đĩa phim hành động Mỹ",
+      "code": "KK231",
+      "category": {
+        "id": 1,
+        "name": "Đĩa phim"
+      }
+    },
+    {
+      "id": 3,
+      "name": "Mario",
+      "price": 20,
+      "quantity": 10,
+      "image": "image3",
+      "description": "Đĩa game phá đảo",
+      "code": "MR423",
+      "category": {
+        "id": 2,
+        "name": "Đĩa game"
+      }
+    },
+    {
+      "id": 4,
+      "name": "Đột kích",
+      "price": 40,
+      "quantity": 10,
+      "image": "image2",
+      "description": "Đĩa game hành động",
+      "code": "DK312",
+      "category": {
+        "id": 2,
+        "name": "Đĩa game"
+      }
+    },
+    {
+      "id": 5,
+      "name": "Hết thương cạn nhớ",
+      "price": 20,
+      "quantity": 10,
+      "image": "image1",
+      "description": "Đĩa nhạc trẻ hay nhất",
+      "code": "HT323",
+      "category": {
+        "id": 3,
+        "name": "Đĩa nhạc"
+      }
+    },
+    {
+      "id": 6,
+      "name": "Thất tình",
+      "price": 40,
+      "quantity": 10,
+      "image": "image2",
+      "description": "Dành cho các bạn thất tình",
+      "code": "TT432",
+      "category": {
+        "id": 3,
+        "name": "Đĩa nhạc"
+      }
+    }
+  ],
+  "category-list": [
+    {
+      "id": 1,
+      "name": "Đĩa phim"
+    },
+    {
+      "id": 2,
+      "name": "Đĩa game"
+    },
+    {
+      "id": 3,
+      "name": "Đĩa nhạc"
+    }
+  ]
+}
