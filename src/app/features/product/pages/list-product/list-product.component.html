@@ -2,11 +2,32 @@
   <div class="row">
     <div class="col-md-12">
       <div class="card">
-        <div class="card-header text-center">
-            <h2>Product List</h2>
+        <div class="card-header">
+          <div class="row mt-3">
+            <div class="col-md-3">
+              <label>Thể loại</label>
+              <select class="browser-default custom-select"  [(ngModel)]="txtCategory" (ngModelChange)="searchProduct()" >
+                <option *ngFor="let ctgr of categoryList" value="{{ctgr.id}}">{{ctgr.name}}</option>
+              </select>
+            </div>
+            <div class="col-md-3 ">
+              <div class="md-form ">
+                <input mdbInput type="text" id="codeProduct" [(ngModel)]="txtCode" (keyup)="searchProduct()" class="form-control">
+                <label for="codeProduct" class="">Tìm theo mã</label>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="md-form">
+                <input mdbInput type="text" id="nameProduct" [(ngModel)]="txtName" (keyup)="searchProduct()" class="form-control">
+                <label for="nameProduct" class="">Tìm theo tên</label>
+              </div>
+            </div>
+            <div class="col-md-2 pt-4">
+              <button type="button"  size="sm" mdbBtn color="primary" mdbWavesEffect>Thêm sản phẩm</button>
+            </div>
+          </div>
         </div>
-        <div class="card-body">
-          <table mdbTable #tableEl="mdbTable" class="z-depth-1">
+          <table mdbTable #tableEl="mdbTable" >
             <thead>
             <tr>
               <th *ngFor="let head of headElements; let i = index" scope="col">{{head}}
@@ -34,7 +55,6 @@
             </tr>
             </tfoot>
           </table>
-        </div>
 
       </div>
     </div>

@@ -10,10 +10,20 @@ export const frontendUrl = {
   NOT_FOUND: '**'
 };
 export const ApiUrl = {
-  GET_LIST_PRODUCT: 'product-list',
-  GET_LIST_CATEGORY: 'category-list',
-  GET_LIST_USER: 'user-list',
-  GET_LIST_CUSTOMER: 'customer-list'
+
+  ADMIN: {
+    GET_LIST_PRODUCT: '/admin/product/createProduct'
+  },
+  EMPLOYEE: {
+    GET_LIST_CATEGORY: '/employee/category/getListCategory',
+    GET_LIST_PRODUCT: '/employee/product/getListProduct',
+
+    // Customer
+    CREATE_CUSTOMER: '/employee/customer/createCustomer',
+    GET_LIST_CUSTOMER: '/employee/customer/getListCustomer'
+  },
+
+
 
 }
 export const LocalStorage = {

@@ -13,6 +13,9 @@ export class CommonService {
   get(url: string): Observable<any> {
     return this.http.get(this.baseUrl+url);
   }
+  pos(url: string, request: any): Observable<any> {
+    return  this.http.post(this.baseUrl+url, request);
+  }
   saveLocalStorage(key: string, value: any): void {
     localStorage.setItem(key, JSON.stringify(value));
   }

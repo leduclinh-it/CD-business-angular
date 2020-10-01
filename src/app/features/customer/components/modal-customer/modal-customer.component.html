@@ -1,0 +1,53 @@
+<div class="container p-2">
+  <div class="card">
+    <div class="card-header text-center">
+      <h4 class="label">Thêm khách hàng</h4>
+    </div>
+    <div class="card-body">
+      <form *ngIf="!code" class="row" [formGroup]="customerForm">
+        <div class="col-md-6">
+          <div class="md-form">
+            <input mdbInput type="text" id="fullName" formControlName="fullName"  class="form-control" mdbValidate>
+            <label for="fullName" class="">Họ và tên</label>
+            <mdb-error class="mt-1" *ngIf="f.fullName?.touched && f.fullName?.errors?.required">Chưa nhập họ và tên</mdb-error>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="md-form">
+          <input mdbInput type="text" id="phone" formControlName="phone"  class="form-control" mdbValidate>
+          <label for="phone" class="">Số điện thoại</label>
+            <mdb-error class="mt-1" *ngIf="f.phone?.touched && f.phone?.errors?.required">Chưa nhập số điện thoại</mdb-error>
+            <mdb-error class="mt-1" *ngIf="f.phone?.invalid && f.phone.dirty && !f.phone?.hasError('required')">Số điện thoại sai định dạng</mdb-error>
+
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="md-form">
+          <input mdbInput type="text" id="address" formControlName="address" class="form-control" mdbValidate>
+          <label for="address" class="">Địa chỉ</label>
+            <mdb-error class="mt-1" *ngIf="f.address?.touched && f.address?.errors?.required">Chưa nhập địa chỉ</mdb-error>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="md-form">
+          <input mdbInput type="text" id="email" formControlName="email" class="form-control" mdbValidate>
+          <label for="email" class="">Địa chỉ Email</label>
+            <mdb-error class="mt-1" *ngIf="f.email?.touched && f.email?.errors?.required">Chưa nhập địa chỉ email</mdb-error>
+            <mdb-error class="mt-1" *ngIf="f.email?.touched && f.email?.errors?.email">Địa chỉ email sai định dạng</mdb-error>
+          </div>
+        </div>
+      </form>
+      <div class="row" *ngIf="code">
+        <div class="col-md-12 text-center">
+          <p>Thêm khách hàng thành công</p>
+          <h4 class="text-danger">Mã khách hàng: {{code}}</h4>
+        </div>
+      </div>
+    </div>
+    <div class="card-footer">
+      <button *ngIf="!code" type="button" class="float-left" mdbBtn mdbWavesEffect size="sm" color="red" (click)="modalRef.hide()">Hủy</button>
+      <button *ngIf="!code" type="button" class="float-right" [disabled]="customerForm.status == 'INVALID'" mdbBtn mdbWavesEffect size="sm" color="success" (click)="createCustomer()">Thêm</button>
+      <button *ngIf="code" type="button" class="float-right" mdbBtn mdbWavesEffect size="sm" color="red" (click)="modalRef.hide()">Ok</button>
+    </div>
+  </div>
+</div>

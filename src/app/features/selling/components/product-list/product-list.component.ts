@@ -52,8 +52,6 @@ export class ProductListComponent implements OnInit {
       this.mdbTable.setDataSource(prev);
     }
     if (this.txtCategory) {
-      console.log(this.txtCategory)
-
       this.elements = this.elements.filter(item => {
         return item.category.id == this.txtCategory;
       })

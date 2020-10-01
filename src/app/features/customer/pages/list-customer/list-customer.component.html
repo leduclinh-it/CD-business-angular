@@ -2,8 +2,30 @@
   <div class="row">
     <div class="col-md-12">
       <div class="card">
-        <div class="card-header text-center">
-          <h2>Customer List</h2>
+        <div class="card-header">
+          <div class="row mt-3">
+            <div class="col-md-3">
+              <label>Thể loại</label>
+              <select class="browser-default custom-select"  >
+                <option ></option>
+              </select>
+            </div>
+            <div class="col-md-3 ">
+              <div class="md-form ">
+                <input mdbInput type="text" id="codeProduct"  class="form-control">
+                <label for="codeProduct" class="">Tìm theo mã</label>
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="md-form">
+                <input mdbInput type="text" id="nameProduct"  class="form-control">
+                <label for="nameProduct" class="">Tìm theo tên</label>
+              </div>
+            </div>
+            <div class="col-md-3 pt-4">
+              <button type="button" class="float-right"  size="sm" mdbBtn color="primary" mdbWavesEffect (click)="onCreateCustomer()">Thêm khách hàng</button>
+            </div>
+          </div>
         </div>
         <div class="card-body">
           <table mdbTable #tableEl="mdbTable" class="z-depth-1">
@@ -16,7 +38,7 @@
             <tbody>
             <tr *ngFor="let el of elements; let i = index">
               <th *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex"
-                  scope="row">{{el.id}}</th>
+                  scope="row">{{i+1}}</th>
               <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">{{el.fullName}}</td>
               <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">{{el.email}}</td>
               <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">{{el.phone}}</td>

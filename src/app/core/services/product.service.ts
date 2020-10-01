@@ -12,10 +12,10 @@ import {OrderItemModel} from "../models/order-item.model";
 export class ProductService extends CommonService{
 
   getListProduct(): Observable<ProductModel[]> {
-    return this.get(CONST.ApiUrl.GET_LIST_PRODUCT);
+    return this.get(CONST.ApiUrl.EMPLOYEE.GET_LIST_PRODUCT);
   }
   getListCategory(): Observable<CategoryModel[]> {
-    return this.get(CONST.ApiUrl.GET_LIST_CATEGORY);
+    return this.get(CONST.ApiUrl.EMPLOYEE.GET_LIST_CATEGORY);
   }
   addToCart(orderItem: OrderItemModel) {
     this.saveLocalStorage(CONST.LocalStorage.CART, orderItem);
