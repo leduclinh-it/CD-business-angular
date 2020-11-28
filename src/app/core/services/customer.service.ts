@@ -3,6 +3,7 @@ import {CommonService} from "./common.service";
 import {Observable} from "rxjs";
 import {CustomerModel} from "../models/customer.model";
 import * as CONST from "../constants";
+import {CustomerResponseByCode} from "../models/CustomerResponseByCode";
 @Injectable({
   providedIn: 'root'
 })
@@ -16,7 +17,7 @@ export class CustomerService extends CommonService{
     return this.pos(CONST.ApiUrl.EMPLOYEE.CREATE_CUSTOMER, customer);
   }
 
-  getCustomerByCode(code: String): Observable<CustomerModel> {
+  getCustomerByCode(code: String): Observable<CustomerResponseByCode> {
     return this.get(CONST.ApiUrl.EMPLOYEE.GET_CUSTOMER_BY_CODE + `?code=${code}`)
   }
 

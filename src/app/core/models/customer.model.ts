@@ -1,5 +1,5 @@
 export interface CustomerModel {
-     id?: string;
+     id?: number;
      fullName: string;
      phone: string;
      email: string;

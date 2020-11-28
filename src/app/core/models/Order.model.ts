@@ -3,7 +3,7 @@ import {OrderItemModel} from "./order-item.model";
 
 export interface OrderModel {
   id?: number,
-  customer: string,
+  customer: number,
   employee: string,
   dateCurrent: Date,
   total: number,

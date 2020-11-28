@@ -20,6 +20,7 @@ export const ApiUrl = {
 
     //order
     CREATE_ORDER: '/employee/order/createOrder',
+    UPDATE_ORDER: '/employee/order/updateOrder',
 
     // Customer
     CREATE_CUSTOMER: '/employee/customer/createCustomer',

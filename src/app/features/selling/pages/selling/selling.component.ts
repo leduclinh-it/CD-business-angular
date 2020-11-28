@@ -26,6 +26,7 @@ export class SellingComponent implements OnInit {
   customerName: string;
   customerError = false;
   error = false;
+  orders: OrderModel[];
   modalRef: MDBModalRef;
 
   @ViewChild(ProductListComponent) listProductComponent: ProductListComponent;
@@ -88,6 +89,8 @@ export class SellingComponent implements OnInit {
         localStorage.removeItem(CONST.LocalStorage.CART);
         this.getCart();
         this.codeCustomer = null;
+        this.employee = null;
+        this.customerName = null;
       }, error => console.log(error))
     } else {
       this.error = true;
@@ -95,7 +98,9 @@ export class SellingComponent implements OnInit {
   }
   getCustomerByCode() {
     this.customerService.getCustomerByCode(this.codeCustomer).subscribe(res => {
-      this.customer = res;
+      this.customer = res.customer;
+      this.orders = res.orders;
+      console.log(this.orders)
       if (this.customer.code !=null) {
         this.customerName = this.customer.fullName;
         this.customerError = false;
@@ -112,13 +117,18 @@ export class SellingComponent implements OnInit {
     const modalOptions = {
       data: {
         customer: this.customer,
-      }
+        orders: this.orders
+      },
+      class: 'modal-lg'
+
     }
 
-    this.modalService.show(ModalCustomerInfoComponent, modalOptions);
-    // this.modalRef.content.saveButtonClicked.subscribe( value =>{
-    //
-    // })
+    this.modalRef = this.modalService.show(ModalCustomerInfoComponent, modalOptions);
+    this.modalRef.content.saveButtonClicked.subscribe( value =>{
+      console.log(value);
+      this.getCustomerByCode();
+      this.listProductComponent.getListProduct();
+    })
   }
 
 

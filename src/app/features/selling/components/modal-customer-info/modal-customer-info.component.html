@@ -1,1 +1,98 @@
-<p>modal-customer-info works!</p>
+<div class="container p-2">
+  <div class="card">
+    <div class="card-header text-center">
+      <h4 class="label">Thông tin khách hàng</h4>
+    </div>
+    <div class="card-body">
+      <form class="row" >
+        <div class="col-md-6">
+          <div class="md-form">
+            <input mdbInput type="text" disabled id="fullName" [value]="customer.fullName" class="form-control" mdbValidate>
+            <label for="fullName" class="">Họ và tên</label>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="md-form">
+            <input mdbInput type="text" disabled id="phone" [value]="customer.phone" class="form-control" mdbValidate>
+            <label for="phone" class="">Số điện thoại</label>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="md-form">
+            <input mdbInput type="text" disabled id="address" [value]="customer.address" class="form-control" mdbValidate>
+            <label for="address" class="">Địa chỉ</label>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="md-form">
+            <input mdbInput type="text" disabled id="email" [value]="customer.email" class="form-control" mdbValidate>
+            <label for="email" class="">Địa chỉ Email</label>
+          </div>
+        </div>
+      </form>
+      <div class="row">
+        <div class="col-md-12">
+          <table mdbTable hover="true" #tableEl="mdbTable" >
+            <thead class="sticky-top">
+            <tr>
+              <th [mdbTableSort]="elements" width="15%"
+                  sortBy="id" scope="col">{{headElements[0] | titlecase}}
+              </th>
+              <th [mdbTableSort]="elements"
+                  sortBy="name" scope="col">{{headElements[1] | titlecase}}
+              </th>
+              <th [mdbTableSort]="elements"
+                  sortBy="code" scope="col">{{headElements[2] | titlecase}}
+              </th>
+              <th [mdbTableSort]="elements"
+                  sortBy="code" scope="col">{{headElements[3] | titlecase}}
+              </th>
+              <th [mdbTableSort]="elements"
+                  sortBy="price" scope="col">{{headElements[4] | titlecase}}
+              </th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr (click)="getProducts(el.orderItems, el.id)" *ngFor="let el of elements; let i = index">
+              <th scope="row">{{i+1}}</th>
+              <td >{{el.status==='ACTIVE'?'Chưa thanh toán':'Đã thanh toán'}}</td>
+              <td >{{el.date | date:'dd/MM/yyyy'}}</td>
+              <td >{{el.employee}}</td>
+              <td >{{el.total}}.000đ</td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="card-footer">
+      <table mdbTable *ngIf="products" >
+        <thead class="sticky-top">
+        <tr>
+          <td>Tên sản phẩm</td>
+          <td>Ngày mua</td>
+          <td>Ngày trả</td>
+          <td>Giá</td>
+          <td>Mã sản phẩm</td>
+          <td>Thanh toán</td>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let pr of products; let i = index">
+          <td>{{pr.product.name}}</td>
+          <td>{{pr.dateCurrent | date:'dd/MM/yyyy'}}</td>
+          <td>{{pr.returnDate | date:'dd/MM/yyyy'}}</td>
+          <td>{{pr.price}}.000đ</td>
+          <td>{{pr.product.code}}</td>
+          <td *ngIf="pr.product.status === 'NO'">
+            <button type="button" class="float-left" size="sm" mdbBtn color="warning" (click)="updateOrder(pr)" mdbWavesEffect>Thanh toán</button>
+          </td>
+          <td *ngIf="pr.product.status === 'ACTIVE'">
+            Đã thanh toán
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
