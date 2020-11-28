@@ -5,7 +5,9 @@ import {ProductService} from "../../../../core/services/product.service";
 import {CategoryModel} from "../../../../core/models/category.model";
 import {ModalOrderItemComponent} from "../modal-order-item/modal-order-item.component";
 import {OrderItemModel} from "../../../../core/models/order-item.model";
-
+import {ProductTitleModel} from "../../../../core/models/ProductTitle.model";
+import * as CONST from '../../../../core/constants';
+import {CartModel} from "../../../../core/models/cart.model";
 @Component({
   selector: 'app-product-list',
   templateUrl: './product-list.component.html',
@@ -16,8 +18,8 @@ export class ProductListComponent implements OnInit {
   @ViewChild('tableEl') mdbTable: MdbTableDirective;
   modalRef: MDBModalRef;
 
-  headElements: Array<string> = ['STT' ,'Name', 'Code' ,'Price', 'Quantity', 'Detail'];
-  elements: ProductModel[] = [];
+  headElements: Array<string> = ['STT' ,'Name', 'Quantity' ,'Price', 'Detail'];
+  elements: ProductTitleModel[] = [];
   txtName: string;
   txtCode: string;
   txtCategory: number;
@@ -27,14 +29,7 @@ export class ProductListComponent implements OnInit {
   constructor(private productService: ProductService,private modalService: MDBModalService) { }
 
   ngOnInit(): void {
-    this.productService.getListProduct().subscribe(data => {
-      this.mdbTable.setDataSource(data);
-      this.elements = this.mdbTable.getDataSource();
-      this.previous = this.mdbTable.getDataSource();
-    }, error => console.log(error));
-    this.productService.getListCategory().subscribe(data => {
-      this.categoryList = data;
-    })
+    this.getListProduct();
   }
 
   searchProduct() {
@@ -60,10 +55,36 @@ export class ProductListComponent implements OnInit {
     this.mdbTablePagination.calculateFirstItemIndex();
     this.mdbTablePagination.calculateLastItemIndex();
   }
-
-  detailProduct(prd: ProductModel) {
-    const elementIndex = this.elements.findIndex((elem: ProductModel) => prd.id === elem.id);
-
+  getListProduct() {
+    this.productService.getListProduct().subscribe(data => {
+      this.mdbTable.setDataSource(data);
+      this.elements = this.mdbTable.getDataSource();
+      this.previous = this.mdbTable.getDataSource();
+      this.checkProduct();
+    }, error => console.log(error));
+    this.productService.getListCategory().subscribe(data => {
+      this.categoryList = data;
+    })
+  }
+  checkProduct() {
+    const cart: CartModel = JSON.parse(localStorage.getItem(CONST.LocalStorage.CART));
+    if (cart && cart.orderItem !=null) {
+      cart.orderItem.forEach(value => {
+        const elementIndex = this.elements.findIndex((elem: ProductTitleModel) => value.id === elem.id);
+        if (elementIndex != null) {
+          this.elements[elementIndex].products.forEach(product => {
+            if (product.id === value.product.id) {
+              product.status = 'NO';
+              this.elements[elementIndex].products.length --;
+            }
+          })
+          this.mdbTable.setDataSource(this.elements);
+        }
+      });
+    }
+  }
+  detailProduct(prd: ProductTitleModel) {
+    const elementIndex = this.elements.findIndex((elem: ProductTitleModel) => prd.id === elem.id);
     const modalOptions = {
       data: {
         productDetail: prd,
@@ -71,7 +92,14 @@ export class ProductListComponent implements OnInit {
     }
     this.modalRef = this.modalService.show(ModalOrderItemComponent, modalOptions);
     this.modalRef.content.saveButtonClicked.subscribe((orderItem: OrderItemModel) => {
-      this.elements[elementIndex].quantity -= orderItem.quantity;
+      prd.products.forEach(value => {
+        if (value.id === orderItem.product.id) {
+          value.status = 'NO';
+          prd.products.length -=1;
+        }
+      })
+      this.elements[elementIndex] = prd;
+      this.mdbTable.setDataSource(this.elements);
       this.orderDetail.emit(orderItem);
     });
   }

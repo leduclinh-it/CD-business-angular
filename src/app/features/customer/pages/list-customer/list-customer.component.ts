@@ -18,7 +18,7 @@ export class ListCustomerComponent implements OnInit {
   @ViewChild(MdbTablePaginationComponent, { static: true }) mdbTablePagination: MdbTablePaginationComponent;
   @ViewChild('tableEl') mdbTable: MdbTableDirective;
   modalRef: MDBModalRef;
-  headElements: Array<string> = ['STT' ,'Họ vè tên', 'Email', 'Số điện thoại', 'Địa chỉ', 'Mã khách hàng', 'Công nợ' ,'Chi tiết'];
+  headElements: Array<string> = ['STT' ,'Họ và tên', 'Số điện thoại', 'Mã khách hàng','Chi tiết'];
   elements: CustomerModel[] = [];
   constructor(private customerService: CustomerService,private modalService: MDBModalService) { }
 
@@ -31,10 +31,8 @@ export class ListCustomerComponent implements OnInit {
   onCreateCustomer() {
     this.modalRef = this.modalService.show(ModalCustomerComponent);
     this.modalRef.content.saveButtonClicked.subscribe((customer: CustomerModel) => {
-      console.log(customer);
       this.elements.push(customer);
       this.mdbTable.setDataSource(this.elements);
-
     })
   }
 

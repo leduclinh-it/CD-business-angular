@@ -15,4 +15,12 @@ export class CustomerService extends CommonService{
   createCustomer(customer: CustomerModel){
     return this.pos(CONST.ApiUrl.EMPLOYEE.CREATE_CUSTOMER, customer);
   }
+
+  getCustomerByCode(code: String): Observable<CustomerModel> {
+    return this.get(CONST.ApiUrl.EMPLOYEE.GET_CUSTOMER_BY_CODE + `?code=${code}`)
+  }
+
+  getCustomerById(id: number): Observable<CustomerModel> {
+    return this.get(CONST.ApiUrl.EMPLOYEE.GET_CUSTOMER_BY_ID+ `?id=${id}`);
+  }
 }

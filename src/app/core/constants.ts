@@ -18,9 +18,14 @@ export const ApiUrl = {
     GET_LIST_CATEGORY: '/employee/category/getListCategory',
     GET_LIST_PRODUCT: '/employee/product/getListProduct',
 
+    //order
+    CREATE_ORDER: '/employee/order/createOrder',
+
     // Customer
     CREATE_CUSTOMER: '/employee/customer/createCustomer',
-    GET_LIST_CUSTOMER: '/employee/customer/getListCustomer'
+    GET_LIST_CUSTOMER: '/employee/customer/getListCustomer',
+    GET_CUSTOMER_BY_ID: '/employee/customer/getCustomerById',
+    GET_CUSTOMER_BY_CODE: '/employee/customer/getCustomerByCode'
   },
 
 

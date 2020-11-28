@@ -3,6 +3,7 @@ import {MdbTableDirective, MdbTablePaginationComponent} from "angular-bootstrap-
 import {ProductService} from "../../../../core/services/product.service";
 import {ProductModel} from "../../../../core/models/product.model";
 import {CategoryModel} from "../../../../core/models/category.model";
+import {ProductTitleModel} from "../../../../core/models/ProductTitle.model";
 
 @Component({
   selector: 'app-list-product',
@@ -12,8 +13,8 @@ import {CategoryModel} from "../../../../core/models/category.model";
 export class ListProductComponent implements OnInit {
   @ViewChild(MdbTablePaginationComponent, { static: true }) mdbTablePagination: MdbTablePaginationComponent;
   @ViewChild('tableEl') mdbTable: MdbTableDirective;
-  headElements: Array<string> = ['STT', 'Image' ,'Name', 'Price', 'Quantity', 'Edit'];
-  elements: ProductModel[] = [];
+  headElements: Array<string> = ['STT', 'Quantity' ,'Name', 'Price', 'Edit'];
+  elements: ProductTitleModel[] = [];
   txtName: string;
   txtCode: string;
   txtCategory: number;

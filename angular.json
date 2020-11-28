@@ -87,7 +87,8 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "angular-template:build"
+            "browserTarget": "angular-template:build",
+            "outputPath": "dist/angular-template"
           }
         },
         "test": {

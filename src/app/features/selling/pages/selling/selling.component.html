@@ -1,7 +1,7 @@
 <div class="container-fluid">
   <div class="row">
     <div class="col-md-8">
-      <app-product-list (orderDetail)="onAddOrderItem($event)"></app-product-list>
+      <app-product-list #listComponent (orderDetail)="onAddOrderItem($event)"></app-product-list>
     </div>
     <div class="col-md-4">
       <div class="card">
@@ -12,28 +12,30 @@
           <div class="row">
             <div class="col-md-12">
               <div class="md-form">
-                <input mdbInput type="text" id="user" class="form-control">
+                <input mdbInput type="text" [(ngModel)]="employee" id="user" class="form-control">
                 <label for="user" class="">Nhân viên bán hàng</label>
               </div>
             </div>
             <div class="col-md-4">
               <div class="md-form mt-0">
-                <input mdbInput type="text" id="customerCode" class="form-control">
+                <input mdbInput type="text" [(ngModel)]="codeCustomer" (keyup)="getCustomerByCode()" id="customerCode" class="form-control">
                 <label for="customerCode" class="">Mã khách hàng</label>
               </div>
             </div>
             <div class="col-md-7">
               <div class="md-form mt-0">
-                <input mdbInput type="text" id="customername" class="form-control">
-                <label for="customername" class="">Tên khách hàng</label>
+                <input mdbInput type="text" disabled id="customername" [(ngModel)]="customerName" class="form-control">
+                <label for="customername" class="" *ngIf="!customerError" >Tên khách hàng</label>
+                <label for="customername" *ngIf="customerError">Không tìm thấy khách hàng</label>
               </div>
             </div>
             <div class="col-md-1 pt-3">
-              <a class="text-warning"><mdb-icon fas icon="info"></mdb-icon></a>
+              <a (click)="onDetailCustomer()" class="text-warning" *ngIf="customerName&&customer.debt!=0"><mdb-icon fas icon="info"></mdb-icon></a>
+              <a (click)="onDetailCustomer()" class="text-success" *ngIf="customerName&&customer.debt===0"><mdb-icon fas icon="check"></mdb-icon></a>
             </div>
             <div class="col-md-12">
               <div class="md-form mt-0">
-                <input mdbInput type="date" id="date" class="form-control">
+                <input mdbInput type="date" disabled [(ngModel)]="dateCurrent" id="date" class="form-control">
                 <label for="date" class="">Ngày bán</label>
               </div>
             </div>
@@ -41,18 +43,31 @@
           </div>
           <div *ngIf="cart">
           <div *ngFor="let item of cart.orderItem; index as i" class="row mt-2" >
-            <div class="col-md-1" *ngIf="item.product">
-              <span class="text-white badge bgr-qtt">{{item.quantity}}</span>
+            <div class="col-md-1">
+              <span class="text-danger badge bgr-qtt">{{i+1}}</span>
             </div>
-            <div class="col-md-6" *ngIf="item.product">
+            <div class="col-md-4 pl-0 pr-0 text-center">
               <p class="text-dark" >
-                <a>{{item.product.name}}</a>
+                {{item.product.name}}
               </p>
 
             </div>
-            <div class="col-md-4" *ngIf="item.product">
-              <p class="text-dark float-right" >
-                <a>{{item.price}}.000Đ</a>
+            <div class="col-md-3 pl-0 pr-0" >
+              <p class="text-dark" >
+                {{item.product.code}}
+              </p>
+
+            </div>
+            <div class="col-md-4 pl-0 " *ngIf="item.product">
+              <span class="float-right">
+                <a (click)="onRemove(i)">
+                <mdb-icon fas icon="times" ></mdb-icon>
+                </a>
+              </span>
+
+
+              <p class="text-dark float-right mr-4" >
+                {{item.price}}.000Đ
               </p>
             </div>
           </div>
@@ -61,40 +76,30 @@
 
             <div class="col-md-7">
               <p class="text-dark">
-                Cộng  món)
-              </p>
-              <p class="text-dark ">
-                Vận chuyển
+                Total
               </p>
 
             </div>
-            <div class="col-md-4">
-              <p class="text-dark float-right">
-                <a>.000Đ</a>
-              </p><br>
-              <p class="text-dark float-right">
-                <a>0.000Đ</a>
+            <div class="col-md-4 pr-0">
+              <p class="text-dark float-right mr-2">
+                <a>{{cart.total}}.000Đ</a>
               </p>
-            </div>
-            <div class="col-md-12 mt-3">
-              <div class="input-group mb-3">
-                <input type="text" class="form-control" placeholder="Nhập mã ưu đãi tại đây" aria-label="Nhập mã ưu đãi tại đây"
-                       aria-describedby="button-addon2">
-                <div class="input-group-append">
-                  <button mdbBtn color="default"  size="md" class="m-0 px-3 py-2" type="button" id="button-addon2" mdbWavesEffect>Áp dụng</button>
-                </div>
-              </div>
             </div>
           </div>
           </div>
         </div>
         <div class="card-footer">
             <div class="row">
-              <div class="col">
-                <button type="button" class="float-left" size="sm" mdbBtn color="warning" mdbWavesEffect>Hủy</button>
+              <div class="col-md-12">
+                <div class="alert alert-danger" *ngIf="error" role="alert">
+                  Chưa chọn sản phẩm
+                </div>
               </div>
               <div class="col">
-                <button type="button" class="float-right" size="sm" mdbBtn color="primary" mdbWavesEffect>Than toán</button>
+                <button type="button" class="float-left" size="sm" mdbBtn color="warning" (click)="onCancel()" mdbWavesEffect>Hủy</button>
+              </div>
+              <div class="col">
+                <button type="button" class="float-right" [ngClass]="!employee||!customer||!cart?'disabled': ''"  size="sm" mdbBtn color="primary" mdbWavesEffect (click)="onCreateOrder()">Than toán</button>
               </div>
             </div>
         </div>
