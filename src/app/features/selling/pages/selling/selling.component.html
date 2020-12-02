@@ -95,10 +95,13 @@
                   Chưa chọn sản phẩm
                 </div>
               </div>
-              <div class="col">
+              <div class="col-md-4">
                 <button type="button" class="float-left" size="sm" mdbBtn color="warning" (click)="onCancel()" mdbWavesEffect>Hủy</button>
               </div>
-              <div class="col">
+              <div class="col-md-4">
+                <button type="button" [ngClass]="!employee||!customer||!cart?'disabled': ''"  size="sm" mdbBtn color="success" mdbWavesEffect (click)="onCreateOrder()">Đặt trước</button>
+              </div>
+              <div class="col-md-4">
                 <button type="button" class="float-right" [ngClass]="!employee||!customer||!cart?'disabled': ''"  size="sm" mdbBtn color="primary" mdbWavesEffect (click)="onCreateOrder()">Than toán</button>
               </div>
             </div>

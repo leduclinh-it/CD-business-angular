@@ -30,6 +30,13 @@ export class ModalCustomerInfoComponent implements OnInit {
   }
   getProducts(productList: OrderItemModel[], id: number) {
     this.products = productList;
+    productList.forEach(product => {
+      if (product) {
+        let driftDay = new Date(product.dateReturn).getTime() - new Date(product.dateReturn).getTime();
+        const days = Math.floor(driftDay / (1000 * 60 * 60 * 24))+1;
+        console.log(days);
+      }
+    })
     this.orderId = id;
   }
 

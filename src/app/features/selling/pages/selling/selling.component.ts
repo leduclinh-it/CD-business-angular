@@ -66,7 +66,11 @@ export class SellingComponent implements OnInit {
   }
   onCancel() {
     localStorage.removeItem(CONST.LocalStorage.CART);
+    this.codeCustomer = null;
+    this.employee = null;
+    this.customerName = null;
     this.getCart();
+    this.listProductComponent.getListProduct();
   }
   onRemove(index: number) {
     this.cart.orderItem.splice(index, 1);

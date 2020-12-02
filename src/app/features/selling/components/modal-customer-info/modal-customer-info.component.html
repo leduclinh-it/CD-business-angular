@@ -81,7 +81,7 @@
         <tr *ngFor="let pr of products; let i = index">
           <td>{{pr.product.name}}</td>
           <td>{{pr.dateCurrent | date:'dd/MM/yyyy'}}</td>
-          <td>{{pr.returnDate | date:'dd/MM/yyyy'}}</td>
+          <td>{{pr.dateReturn | date:'dd/MM/yyyy'}}</td>
           <td>{{pr.price}}.000đ</td>
           <td>{{pr.product.code}}</td>
           <td *ngIf="pr.product.status === 'NO'">
