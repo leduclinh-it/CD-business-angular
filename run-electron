@@ -1,1 +1,1 @@
-run electron: electron .
+run electron: npm run electron
