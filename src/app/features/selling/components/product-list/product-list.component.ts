@@ -8,6 +8,8 @@ import {OrderItemModel} from "../../../../core/models/order-item.model";
 import {ProductTitleModel} from "../../../../core/models/ProductTitle.model";
 import * as CONST from '../../../../core/constants';
 import {CartModel} from "../../../../core/models/cart.model";
+import {ModalCustomerInfoComponent} from "../modal-customer-info/modal-customer-info.component";
+import {ModalBookingComponent} from "../modal-booking/modal-booking.component";
 @Component({
   selector: 'app-product-list',
   templateUrl: './product-list.component.html',
@@ -26,7 +28,9 @@ export class ProductListComponent implements OnInit {
   previous: any;
   categoryList: CategoryModel[];
   @Output() orderDetail = new EventEmitter<OrderItemModel>();
-  constructor(private productService: ProductService,private modalService: MDBModalService) { }
+
+  constructor(private productService: ProductService,
+              private modalService: MDBModalService) { }
 
   ngOnInit(): void {
     this.getListProduct();
@@ -37,10 +41,6 @@ export class ProductListComponent implements OnInit {
     if (!this.txtName || !this.txtCode || !this.txtCategory) {
       this.mdbTable.setDataSource(this.previous);
       this.elements = this.mdbTable.getDataSource();
-    }
-    if (this.txtCode) {
-      this.elements = this.mdbTable.filterLocalDataByFields(this.txtCode,['code']);
-      this.mdbTable.setDataSource(prev);
     }
     if (this.txtName) {
       this.elements = this.mdbTable.filterLocalDataByFields(this.txtName,['name']);

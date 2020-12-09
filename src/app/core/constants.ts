@@ -12,7 +12,8 @@ export const frontendUrl = {
 export const ApiUrl = {
 
   ADMIN: {
-    GET_LIST_PRODUCT: '/admin/product/createProduct'
+    CREATE_PRODUCT: '/admin/product/createProduct',
+    DELETE_CUSTOMER: '/admin/customer/deleteCustomer'
   },
   EMPLOYEE: {
     GET_LIST_CATEGORY: '/employee/category/getListCategory',
@@ -26,7 +27,11 @@ export const ApiUrl = {
     CREATE_CUSTOMER: '/employee/customer/createCustomer',
     GET_LIST_CUSTOMER: '/employee/customer/getListCustomer',
     GET_CUSTOMER_BY_ID: '/employee/customer/getCustomerById',
-    GET_CUSTOMER_BY_CODE: '/employee/customer/getCustomerByCode'
+    GET_CUSTOMER_BY_CODE: '/employee/customer/getCustomerByCode',
+
+    //Booking
+    CREATE_BOOKING: '/employee/booking/createBooking',
+
   },
 
 

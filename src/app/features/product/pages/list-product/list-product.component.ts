@@ -1,9 +1,11 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
-import {MdbTableDirective, MdbTablePaginationComponent} from "angular-bootstrap-md";
+import {MDBModalRef, MDBModalService, MdbTableDirective, MdbTablePaginationComponent} from "angular-bootstrap-md";
 import {ProductService} from "../../../../core/services/product.service";
 import {ProductModel} from "../../../../core/models/product.model";
 import {CategoryModel} from "../../../../core/models/category.model";
 import {ProductTitleModel} from "../../../../core/models/ProductTitle.model";
+import {ModalCustomerInfoComponent} from "../../../selling/components/modal-customer-info/modal-customer-info.component";
+import {ModalAddProductComponent} from "../../components/modal-add-product/modal-add-product.component";
 
 @Component({
   selector: 'app-list-product',
@@ -20,7 +22,9 @@ export class ListProductComponent implements OnInit {
   txtCategory: number;
   previous: any;
   categoryList: CategoryModel[];
-  constructor(private productService: ProductService) { }
+  modalRef: MDBModalRef;
+
+  constructor(private productService: ProductService, private modalService: MDBModalService) { }
 
   ngOnInit(): void {
     this.productService.getListProduct().subscribe(data => {
@@ -54,6 +58,18 @@ export class ListProductComponent implements OnInit {
     }
     this.mdbTablePagination.calculateFirstItemIndex();
     this.mdbTablePagination.calculateLastItemIndex();
+  }
+  onAddProduct() {
+    // const modalOptions = {
+    //   data: {
+    //     product:
+    //     orders: this.orders
+    //   },
+    //   class: 'modal-lg'
+    //
+    // }
+    this.modalRef = this.modalService.show(ModalAddProductComponent);
+
   }
 
 

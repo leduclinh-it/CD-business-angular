@@ -104,7 +104,6 @@ export class SellingComponent implements OnInit {
     this.customerService.getCustomerByCode(this.codeCustomer).subscribe(res => {
       this.customer = res.customer;
       this.orders = res.orders;
-      console.log(this.orders)
       if (this.customer.code !=null) {
         this.customerName = this.customer.fullName;
         this.customerError = false;
@@ -129,7 +128,6 @@ export class SellingComponent implements OnInit {
 
     this.modalRef = this.modalService.show(ModalCustomerInfoComponent, modalOptions);
     this.modalRef.content.saveButtonClicked.subscribe( value =>{
-      console.log(value);
       this.getCustomerByCode();
       this.listProductComponent.getListProduct();
     })

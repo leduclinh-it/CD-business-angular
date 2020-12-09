@@ -24,4 +24,8 @@ export class CustomerService extends CommonService{
   getCustomerById(id: number): Observable<CustomerModel> {
     return this.get(CONST.ApiUrl.EMPLOYEE.GET_CUSTOMER_BY_ID+ `?id=${id}`);
   }
+
+  deleteCustomer(id: number): Observable<any> {
+    return this.pos(CONST.ApiUrl.ADMIN.DELETE_CUSTOMER+`?id=${id}`,null);
+  }
 }

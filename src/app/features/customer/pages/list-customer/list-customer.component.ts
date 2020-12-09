@@ -8,6 +8,9 @@ import {
 import {CustomerModel} from "../../../../core/models/customer.model";
 import {CustomerService} from "../../../../core/services/customer.service";
 import {ModalCustomerComponent} from "../../components/modal-customer/modal-customer.component";
+import {OrderModel} from "../../../../core/models/Order.model";
+import {ModalCustomerInfoComponent} from "../../../selling/components/modal-customer-info/modal-customer-info.component";
+import {ModalCustomerDetailComponent} from "../../components/modal-customer-detail/modal-customer-detail.component";
 
 @Component({
   selector: 'app-list-customer',
@@ -20,9 +23,14 @@ export class ListCustomerComponent implements OnInit {
   modalRef: MDBModalRef;
   headElements: Array<string> = ['STT' ,'Họ và tên', 'Số điện thoại', 'Mã khách hàng','Chi tiết'];
   elements: CustomerModel[] = [];
+  customer: CustomerModel;
+  orders: OrderModel[];
   constructor(private customerService: CustomerService,private modalService: MDBModalService) { }
 
   ngOnInit(): void {
+    this.getListCustomer();
+  }
+  getListCustomer() {
     this.customerService.getListCustomer().subscribe(res => {
       this.mdbTable.setDataSource(res);
       this.elements = this.mdbTable.getDataSource();
@@ -33,6 +41,26 @@ export class ListCustomerComponent implements OnInit {
     this.modalRef.content.saveButtonClicked.subscribe((customer: CustomerModel) => {
       this.elements.push(customer);
       this.mdbTable.setDataSource(this.elements);
+    })
+  }
+  onGetDetailCustomer(code: string) {
+    this.customerService.getCustomerByCode(code).subscribe(res => {
+      this.customer = res.customer;
+      this.orders = res.orders;
+      const modalOptions = {
+        data: {
+          customer: this.customer,
+          orders: this.orders
+        },
+        class: 'modal-lg'
+
+      }
+      this.modalRef = this.modalService.show(ModalCustomerDetailComponent, modalOptions);
+      this.modalRef.content.saveButtonClicked.subscribe( value =>{
+        this.getListCustomer()
+      })
+    }, error => {
+      console.log(error)
     })
   }
 

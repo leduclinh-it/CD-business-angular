@@ -6,6 +6,7 @@ import {CategoryModel} from "../models/category.model";
 import {OrderItemModel} from "../models/order-item.model";
 import {ProductTitleModel} from "../models/ProductTitle.model";
 import {CartModel} from "../models/cart.model";
+import {CreateProductRequest} from "../models/create-product-request";
 
 @Injectable({
   providedIn: 'root'
@@ -23,5 +24,8 @@ export class ProductService extends CommonService{
   }
   getCart(){
      return this.getLocalStorage(CONST.LocalStorage.CART);
+  }
+  createProduct(createProductRequest: CreateProductRequest): Observable<any> {
+    return this.pos(CONST.ApiUrl.ADMIN.CREATE_PRODUCT, createProductRequest);
   }
 }

@@ -6,5 +6,6 @@ export interface OrderItemModel {
   dateCurrent: Date;
   dateReturn: Date;
   price: number;
+  status: string;
 }
 

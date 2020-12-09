@@ -1,0 +1,26 @@
+<div class="card">
+  <div class="card-header">
+    <h4>Thông tin khách hàng</h4>
+  </div>
+  <div class="card-body">
+    <div class="row">
+      <div class="col-md-4">
+        <div class="md-form mt-0">
+          <input mdbInput type="text" [(ngModel)]="codeCustomer" (keyup)="getCustomerByCode()" id="code" class="form-control">
+          <label for="code" class="">Mã khách hàng</label>
+        </div>
+      </div>
+      <div class="col-md-7">
+        <div class="md-form mt-0">
+          <input mdbInput type="text" disabled id="name" [(ngModel)]="customerName" class="form-control">
+          <label for="name" class="" *ngIf="!customerError" >Tên khách hàng</label>
+          <label for="name" *ngIf="customerError">Không tìm thấy khách hàng</label>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="card-footer">
+    <button type="button" (click)="onCreateBooking()" [ngClass]="!customerName?'disabled': ''" class="float-left" size="sm" mdbBtn color="warning" mdbWavesEffect>Ok</button>
+
+  </div>
+</div>
