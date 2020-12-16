@@ -1,11 +1,11 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {MDBModalService, MdbTablePaginationComponent} from "angular-bootstrap-md";
-import {OrderModel} from "../../../../core/models/Order.model";
+import {OrderModel} from "../../../../core/models/order.model";
 import {OrderItemModel} from "../../../../core/models/order-item.model";
 import {CustomerModel} from "../../../../core/models/customer.model";
 import {Subject} from "rxjs";
 import {OrderService} from "../../../../core/services/order.service";
-import {UpdateOrderRequestModel} from "../../../../core/models/updateOrderRequest.model";
+import {UpdateOrderRequestModel} from "../../../../core/models/update-order-request.model";
 import {CustomerService} from "../../../../core/services/customer.service";
 
 @Component({

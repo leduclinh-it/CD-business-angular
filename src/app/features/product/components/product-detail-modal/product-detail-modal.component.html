@@ -1,0 +1,60 @@
+<div class="cart">
+  <div class="card-header">
+    <h4>{{productTitleDetail.name}}</h4>
+  </div>
+  <div class="card-body">
+    <div class="row" [formGroup]="productForm">
+      <div class="col-md-6 ">
+        <div class="md-form">
+          <input mdbInput type="text"  id="name" formControlName="name"  class="form-control" mdbValidate>
+          <label for="name" class="">Tên sản phẩm</label>
+        </div>
+      </div>
+      <div class="col-md-6 ">
+        <div class="md-form">
+
+          <input mdbInput type="text"  id="price" formControlName="price"  class="form-control" mdbValidate>
+          <label for="price" class="">Giá</label>
+        </div>
+      </div>
+
+      <div class="col-md-12 ">
+        <div class="md-form">
+          <select class="browser-default custom-select"  formControlName="categoryId" >
+            <option *ngFor="let ctgr of categoryList" value="{{ctgr.id}}">{{ctgr.name}}</option>
+          </select>
+        </div>
+      </div>
+      <div class="col-md-12 pre-scrollable">
+        <table mdbTable *ngIf="productTitleDetail.products.length>0" >
+          <thead class="sticky-top">
+          <tr>
+            <td>Mã sản phẩm</td>
+            <td>Tình trạng</td>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let pr of productTitleDetail.products; let i = index">
+            <td>{{pr.code}}</td>
+            <td><span *ngIf="pr.status==='ACTIVE'">Chưa thuê</span><span *ngIf="pr.status==='NO'">Đã thuê</span></td>
+            <td><button type="button" (click)="onRemoveProduct(pr.id, i)" size="sm" mdbBtn color="dark" mdbWavesEffect>Xóa</button></td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="col-md-12 ">
+        <div class="md-form">
+          <input mdbInput type="text" id="image" formControlName="code"  class="form-control" mdbValidate>
+          <label for="image" class="">Mã sản phẩm</label>
+        </div>
+      </div>
+
+    </div>
+  </div>
+  <div class="card-footer pb-5">
+    <button type="button"  class="float-right" size="sm" mdbBtn color="primary" mdbWavesEffect *ngIf="f.code.value" (click)="onAddProduct()">Thêm đĩa</button>
+    <button type="button"  class="float-right" size="sm" mdbBtn color="success" mdbWavesEffect>Lưu</button>
+    <button type="button"  class="float-left" size="sm" mdbBtn color="danger" (click)="onRemoveProductTitle(this.productTitleDetail.id)" mdbWavesEffect *ngIf="this.productTitleDetail.products.length===0">Xóa</button>
+  </div>
+
+</div>

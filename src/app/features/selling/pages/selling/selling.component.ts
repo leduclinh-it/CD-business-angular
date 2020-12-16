@@ -4,7 +4,7 @@ import {CartModel} from "../../../../core/models/cart.model";
 import {ProductService} from "../../../../core/services/product.service";
 import {DatePipe} from "@angular/common";
 import * as CONST from '../../../../core/constants';
-import {OrderModel} from "../../../../core/models/Order.model";
+import {OrderModel} from "../../../../core/models/order.model";
 import {CustomerService} from "../../../../core/services/customer.service";
 import {CustomerModel} from "../../../../core/models/customer.model";
 import {OrderService} from "../../../../core/services/order.service";

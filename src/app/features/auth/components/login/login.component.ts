@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Router} from "@angular/router";
-
+import {AuthService} from "../../../../core/services/auth.service";
+import * as CONST from '../../../../core/constants';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -14,6 +15,7 @@ export class LoginComponent implements OnInit {
   loginSuccess = false;
   constructor(private router: Router,
               private fb: FormBuilder,
+              private authService: AuthService
               ) { }
 
   ngOnInit(): void {
@@ -31,10 +33,16 @@ export class LoginComponent implements OnInit {
       password: this.password.value
     }
     this.loading = true;
+    if (this.username.value === 'admin' && this.password.value === 'admin123') {
+      this.authService.saveLocalStorage(CONST.LocalStorage.USER_INFO, loginReq);
+     return  this.router.navigate([CONST.frontendUrl.DASHBOARD])
+    }
+    else {
+      this.loading = false;
+      this.error = true;
+    }
 
   }
-  getUserInfo() {
 
-  }
 
 }

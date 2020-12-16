@@ -1,9 +1,11 @@
 import { Injectable } from '@angular/core';
+import {CommonService} from "./common.service";
 
 @Injectable({
   providedIn: 'root'
 })
-export class AuthService {
+export class AuthService extends CommonService{
 
-  constructor() { }
+
+
 }

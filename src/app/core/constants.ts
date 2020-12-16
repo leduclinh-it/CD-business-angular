@@ -12,7 +12,10 @@ export const frontendUrl = {
 export const ApiUrl = {
 
   ADMIN: {
+    CREATE_PRODUCT_TITLE: '/admin/product/createProductTitle',
     CREATE_PRODUCT: '/admin/product/createProduct',
+    DELETE_PRODUCT: '/admin/product/deleteProduct',
+    DELETE_PRODUCT_TITLE: '/admin/product/deleteProductTitle',
     DELETE_CUSTOMER: '/admin/customer/deleteCustomer'
   },
   EMPLOYEE: {

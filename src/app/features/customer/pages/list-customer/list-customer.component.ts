@@ -1,15 +1,9 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
-import {
-  MDBModalRef,
-  MDBModalService,
-  MdbTableDirective,
-  MdbTablePaginationComponent,
-} from "angular-bootstrap-md";
+import {MDBModalRef, MDBModalService, MdbTableDirective, MdbTablePaginationComponent,} from "angular-bootstrap-md";
 import {CustomerModel} from "../../../../core/models/customer.model";
 import {CustomerService} from "../../../../core/services/customer.service";
 import {ModalCustomerComponent} from "../../components/modal-customer/modal-customer.component";
-import {OrderModel} from "../../../../core/models/Order.model";
-import {ModalCustomerInfoComponent} from "../../../selling/components/modal-customer-info/modal-customer-info.component";
+import {OrderModel} from "../../../../core/models/order.model";
 import {ModalCustomerDetailComponent} from "../../components/modal-customer-detail/modal-customer-detail.component";
 
 @Component({

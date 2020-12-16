@@ -3,10 +3,11 @@ import {CommonService} from "./common.service";
 import {Observable} from "rxjs";
 import * as CONST from '../constants';
 import {CategoryModel} from "../models/category.model";
-import {OrderItemModel} from "../models/order-item.model";
-import {ProductTitleModel} from "../models/ProductTitle.model";
+import {ProductTitleModel} from "../models/product-title.model";
 import {CartModel} from "../models/cart.model";
-import {CreateProductRequest} from "../models/create-product-request";
+import {CreateProductTitleRequest} from "../models/create-product-title-request";
+import {CreateProductModel} from "../models/create-product.model";
+import {ProductModel} from "../models/product.model";
 
 @Injectable({
   providedIn: 'root'
@@ -25,7 +26,16 @@ export class ProductService extends CommonService{
   getCart(){
      return this.getLocalStorage(CONST.LocalStorage.CART);
   }
-  createProduct(createProductRequest: CreateProductRequest): Observable<any> {
-    return this.pos(CONST.ApiUrl.ADMIN.CREATE_PRODUCT, createProductRequest);
+  createProductTitle(createProductRequest: CreateProductTitleRequest): Observable<any> {
+    return this.post(CONST.ApiUrl.ADMIN.CREATE_PRODUCT_TITLE, createProductRequest);
+  }
+  createProduct(createProduct: CreateProductModel): Observable<ProductModel> {
+    return this.post(CONST.ApiUrl.ADMIN.CREATE_PRODUCT, createProduct);
+  }
+  removeProduct(id: number){
+    return this.post(CONST.ApiUrl.ADMIN.DELETE_PRODUCT+`?id=${id}`,null);
+  }
+  removeProductTitle(id: number){
+    return this.post(CONST.ApiUrl.ADMIN.DELETE_PRODUCT_TITLE+`?id=${id}`,null);
   }
 }

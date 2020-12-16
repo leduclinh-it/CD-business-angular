@@ -5,7 +5,7 @@ import {ProductService} from "../../../../core/services/product.service";
 import {CategoryModel} from "../../../../core/models/category.model";
 import {ModalOrderItemComponent} from "../modal-order-item/modal-order-item.component";
 import {OrderItemModel} from "../../../../core/models/order-item.model";
-import {ProductTitleModel} from "../../../../core/models/ProductTitle.model";
+import {ProductTitleModel} from "../../../../core/models/product-title.model";
 import * as CONST from '../../../../core/constants';
 import {CartModel} from "../../../../core/models/cart.model";
 import {ModalCustomerInfoComponent} from "../modal-customer-info/modal-customer-info.component";

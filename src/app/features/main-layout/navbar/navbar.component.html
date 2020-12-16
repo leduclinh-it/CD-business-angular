@@ -7,9 +7,9 @@
       <img src="https://mdbootstrap.com/img/Marketing/general/logo/small/mdb-angular.png" class="img-fluid" alt="">
     </a>
 
-    <div class="list-group list-group-flush" *ngIf="user">
+    <div class="list-group list-group-flush" >
 
-      <a routerLink="{{routing.DASHBOARD}}" routerLinkActive="active" class="list-group-item list-group-item-action waves-effect">
+      <a *ngIf="user" routerLink="{{routing.DASHBOARD}}" routerLinkActive="active" class="list-group-item list-group-item-action waves-effect">
         <mdb-icon fas icon="chart-pie" class="mr-2"></mdb-icon>Thống kê
       </a>
       <a routerLink="{{routing.SELLING}}" routerLinkActive="active" class="list-group-item list-group-item-action waves-effect">
@@ -18,9 +18,6 @@
         <mdb-icon fas icon="list" class="mr-2"></mdb-icon>Quản lý đĩa</a>
       <a routerLink="{{routing.CUSTOMER_MANAGER}}" routerLinkActive="active" class="list-group-item list-group-item-action waves-effect">
         <mdb-icon fas icon="users" class="mr-2"></mdb-icon>Quản lý khách hàng</a>
-<!--      <a routerLink="{{routing.USER_MANAGER}}" routerLinkActive="active" class="list-group-item list-group-item-action waves-effect">-->
-<!--        <mdb-icon fas icon="user-friends" class="mr-2"></mdb-icon>Nhân viên</a>-->
-
     </div>
 
   </div>
@@ -52,9 +49,14 @@
       <!-- Search form -->
       <ul class="navbar-nav nav-flex-icons">
 
-        <li class="nav-item">
-          <a routerLink="/{{routing.AUTH}}/{{routing.LOGIN}}" class="nav-link" mdbWavesEffect>
+        <li class="nav-item" *ngIf="user">
+          <a (click)="onLogout()" class="nav-link" mdbWavesEffect>
             <mdb-icon fas icon="sign-out-alt"></mdb-icon> Đăng xuất
+          </a>
+        </li>
+        <li class="nav-item" *ngIf="!user">
+          <a [routerLink]="routing.AUTH + '/' + routing.LOGIN" class="nav-link" mdbWavesEffect>
+            <mdb-icon fas icon="sign-out-alt"></mdb-icon> Đăng nhập
           </a>
         </li>
       </ul>

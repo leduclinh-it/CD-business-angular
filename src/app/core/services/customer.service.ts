@@ -3,7 +3,7 @@ import {CommonService} from "./common.service";
 import {Observable} from "rxjs";
 import {CustomerModel} from "../models/customer.model";
 import * as CONST from "../constants";
-import {CustomerResponseByCode} from "../models/CustomerResponseByCode";
+import {CustomerResponseByCodeModel} from "../models/customer-response-by-code.model";
 @Injectable({
   providedIn: 'root'
 })
@@ -14,10 +14,10 @@ export class CustomerService extends CommonService{
   }
 
   createCustomer(customer: CustomerModel){
-    return this.pos(CONST.ApiUrl.EMPLOYEE.CREATE_CUSTOMER, customer);
+    return this.post(CONST.ApiUrl.EMPLOYEE.CREATE_CUSTOMER, customer);
   }
 
-  getCustomerByCode(code: String): Observable<CustomerResponseByCode> {
+  getCustomerByCode(code: String): Observable<CustomerResponseByCodeModel> {
     return this.get(CONST.ApiUrl.EMPLOYEE.GET_CUSTOMER_BY_CODE + `?code=${code}`)
   }
 
@@ -26,6 +26,6 @@ export class CustomerService extends CommonService{
   }
 
   deleteCustomer(id: number): Observable<any> {
-    return this.pos(CONST.ApiUrl.ADMIN.DELETE_CUSTOMER+`?id=${id}`,null);
+    return this.post(CONST.ApiUrl.ADMIN.DELETE_CUSTOMER+`?id=${id}`,null);
   }
 }

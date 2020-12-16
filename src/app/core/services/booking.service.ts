@@ -9,6 +9,6 @@ import {CreateBookingModel} from "../models/create-booking.model";
 export class BookingService extends CommonService{
 
   createBooking(createBooking: CreateBookingModel):Observable<any> {
-    return this.pos(CONST.ApiUrl.EMPLOYEE.CREATE_BOOKING, createBooking);
+    return this.post(CONST.ApiUrl.EMPLOYEE.CREATE_BOOKING, createBooking);
   }
 }

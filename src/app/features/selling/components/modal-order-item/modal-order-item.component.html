@@ -6,7 +6,8 @@
     <form [formGroup]="orderItemForm" class="card-body">
       <div class="row">
         <div class="col-md-4">
-          <img class="img-thumbnail" style="width: 100px" src="https://www.elleman.vn/wp-content/uploads/2018/12/26/phim-hanh-dong-elle-man-1-475x699.jpg">
+          <img class="img-thumbnail" *ngIf="!productDetail.image" style="width: 100px" src="https://www.elleman.vn/wp-content/uploads/2018/12/26/phim-hanh-dong-elle-man-1-475x699.jpg">
+          <img class="img-thumbnail" *ngIf="productDetail.image" style="width: 100px" src="{{productDetail.image}}">
         </div>
         <div class="col-md-5">
             <label>Mã sản phẩm</label>

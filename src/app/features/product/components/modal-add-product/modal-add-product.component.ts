@@ -2,8 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup} from "@angular/forms";
 import {ProductService} from "../../../../core/services/product.service";
 import {CategoryModel} from "../../../../core/models/category.model";
-import {CreateProductRequest} from "../../../../core/models/create-product-request";
+import {CreateProductTitleRequest} from "../../../../core/models/create-product-title-request";
 import {MDBModalService} from "angular-bootstrap-md";
+import {Subject} from "rxjs";
 
 @Component({
   selector: 'app-modal-add-product',
@@ -14,6 +15,7 @@ export class ModalAddProductComponent implements OnInit {
 
   productForm: FormGroup;
   categoryList: CategoryModel[];
+  saveButtonClicked: Subject<any> = new Subject<any>();
   constructor(private fb: FormBuilder,
               private productService: ProductService,
               private modalService: MDBModalService) { }
@@ -34,16 +36,17 @@ export class ModalAddProductComponent implements OnInit {
     return this.productForm.controls;
   }
   onAddProduct() {
-    const createProduct:  CreateProductRequest = {
+    const createProduct:  CreateProductTitleRequest = {
       name: this.f.name.value,
       price: this.f.price.value,
       image: this.f.image.value,
       categoryId: this.f.categoryId.value,
       description: this.f.description.value
     }
-    console.log(createProduct);
-    this.productService.createProduct(createProduct).subscribe(res => {
+    this.productService.createProductTitle(createProduct).subscribe(res => {
+      this.saveButtonClicked.next('');
       this.modalService.hide(1);
+
     })
   }
 

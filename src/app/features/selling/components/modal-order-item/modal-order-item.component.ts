@@ -4,7 +4,7 @@ import {Subject} from "rxjs";
 import {DatePipe} from "@angular/common";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {MDBModalRef, MDBModalService} from "angular-bootstrap-md";
-import {ProductTitleModel} from "../../../../core/models/ProductTitle.model";
+import {ProductTitleModel} from "../../../../core/models/product-title.model";
 import {OrderItemModel} from "../../../../core/models/order-item.model";
 import {ModalBookingComponent} from "../modal-booking/modal-booking.component";
 
@@ -42,7 +42,6 @@ export class ModalOrderItemComponent implements OnInit {
     this.productDetail.products.forEach(product => {
       if (this.f.productId.value == product.id) {
         productDetail = product;
-        productDetail.name = this.productDetail.name;
       }
     })
     const orderItem: OrderItemModel = {
@@ -55,7 +54,7 @@ export class ModalOrderItemComponent implements OnInit {
     }
 
     this.saveButtonClicked.next(orderItem)
-    this.modalRef.hide();
+    this.modalService.hide(1);
   }
   onSelectDate(value) {
     const date = new Date(value.target.value);
