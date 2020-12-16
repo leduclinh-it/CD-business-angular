@@ -3,9 +3,10 @@ import {ProductModel} from "../../../../core/models/product.model";
 import {Subject} from "rxjs";
 import {DatePipe} from "@angular/common";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {MDBModalRef} from "angular-bootstrap-md";
-import {ProductTitleModel} from "../../../../core/models/ProductTitle.model";
+import {MDBModalRef, MDBModalService} from "angular-bootstrap-md";
+import {ProductTitleModel} from "../../../../core/models/product-title.model";
 import {OrderItemModel} from "../../../../core/models/order-item.model";
+import {ModalBookingComponent} from "../modal-booking/modal-booking.component";
 
 @Component({
   selector: 'app-modal-order-item',
@@ -21,7 +22,9 @@ export class ModalOrderItemComponent implements OnInit {
   days = 0;
   returnDate = new Date();
   productSelectedId: number;
-  constructor(private dataPipe: DatePipe, private fb: FormBuilder,public modalRef: MDBModalRef) { }
+  modalRef: MDBModalRef;
+
+  constructor(private dataPipe: DatePipe, private fb: FormBuilder,private modalService: MDBModalService) { }
 
   ngOnInit(): void {
     this.orderItemForm = this.fb.group({
@@ -39,7 +42,6 @@ export class ModalOrderItemComponent implements OnInit {
     this.productDetail.products.forEach(product => {
       if (this.f.productId.value == product.id) {
         productDetail = product;
-        productDetail.name = this.productDetail.name;
       }
     })
     const orderItem: OrderItemModel = {
@@ -47,11 +49,12 @@ export class ModalOrderItemComponent implements OnInit {
       dateReturn: this.returnDate,
       price: this.f.price.value,
       dateCurrent: new Date(this.dateCurrent),
-      product: productDetail
+      product: productDetail,
+      status: 'NO'
     }
 
     this.saveButtonClicked.next(orderItem)
-    this.modalRef.hide();
+    this.modalService.hide(1);
   }
   onSelectDate(value) {
     const date = new Date(value.target.value);
@@ -60,6 +63,14 @@ export class ModalOrderItemComponent implements OnInit {
     let driftDay = date.getTime() - dateCurrent.getTime();
     const days = Math.floor(driftDay / (1000 * 60 * 60 * 24))+1;
     this.f.price.setValue(days * this.productDetail.price);
+  }
+  onShowBookingModal() {
+    const modalOptions = {
+      data: {
+        product: this.productDetail,
+      }
+    }
+    this.modalRef = this.modalService.show(ModalBookingComponent, modalOptions);
   }
 
 }

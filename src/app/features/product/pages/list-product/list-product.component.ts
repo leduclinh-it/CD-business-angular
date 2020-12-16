@@ -1,9 +1,12 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
-import {MdbTableDirective, MdbTablePaginationComponent} from "angular-bootstrap-md";
+import {MDBModalRef, MDBModalService, MdbTableDirective, MdbTablePaginationComponent} from "angular-bootstrap-md";
 import {ProductService} from "../../../../core/services/product.service";
 import {ProductModel} from "../../../../core/models/product.model";
 import {CategoryModel} from "../../../../core/models/category.model";
-import {ProductTitleModel} from "../../../../core/models/ProductTitle.model";
+import {ProductTitleModel} from "../../../../core/models/product-title.model";
+import {ModalCustomerInfoComponent} from "../../../selling/components/modal-customer-info/modal-customer-info.component";
+import {ModalAddProductComponent} from "../../components/modal-add-product/modal-add-product.component";
+import {ProductDetailModalComponent} from "../../components/product-detail-modal/product-detail-modal.component";
 
 @Component({
   selector: 'app-list-product',
@@ -20,17 +23,22 @@ export class ListProductComponent implements OnInit {
   txtCategory: number;
   previous: any;
   categoryList: CategoryModel[];
-  constructor(private productService: ProductService) { }
+  modalRef: MDBModalRef;
+
+  constructor(private productService: ProductService, private modalService: MDBModalService) { }
 
   ngOnInit(): void {
+   this.getListProduct();
+    this.productService.getListCategory().subscribe(data => {
+      this.categoryList = data;
+    })
+  }
+  getListProduct() {
     this.productService.getListProduct().subscribe(data => {
       this.mdbTable.setDataSource(data);
       this.previous = this.mdbTable.getDataSource();
       this.elements = this.mdbTable.getDataSource();
     }, error => console.log(error));
-    this.productService.getListCategory().subscribe(data => {
-      this.categoryList = data;
-    })
   }
   searchProduct() {
     const prev = this.mdbTable.getDataSource();
@@ -54,6 +62,29 @@ export class ListProductComponent implements OnInit {
     }
     this.mdbTablePagination.calculateFirstItemIndex();
     this.mdbTablePagination.calculateLastItemIndex();
+  }
+  onAddProduct() {
+    // const modalOptions = {
+    //   data: {
+    //     product:
+    //     orders: this.orders
+    //   },
+    //   class: 'modal-lg'
+    //
+    // }
+    this.modalRef = this.modalService.show(ModalAddProductComponent);
+
+  }
+  onGetDetailProduct(productTitle: ProductTitleModel) {
+    const modalOption = {
+      data: {
+        productTitleDetail: productTitle
+      }
+    }
+    this.modalRef = this.modalService.show(ProductDetailModalComponent, modalOption);
+    this.modalRef.content.saveButtonClicked.subscribe( value =>{
+      this.getListProduct();
+    })
   }
 
 

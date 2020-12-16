@@ -23,7 +23,7 @@
               </div>
             </div>
             <div class="col-md-2 pt-4">
-              <button type="button"  size="sm" mdbBtn color="primary" mdbWavesEffect>Thêm sản phẩm</button>
+              <button type="button"  size="sm" mdbBtn color="primary" mdbWavesEffect (click)="onAddProduct()">Thêm sản phẩm</button>
             </div>
           </div>
         </div>
@@ -43,7 +43,7 @@
               </td>
               <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">{{el.name}}</td>
               <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">{{el.price}}.000đ</td>
-              <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex"><a><mdb-icon fas icon="pen"></mdb-icon></a></td>
+              <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex"><a (click)="onGetDetailProduct(el)"><mdb-icon fas icon="pen"></mdb-icon></a></td>
             </tr>
             </tbody>
             <tfoot class="grey lighten-5 w-100">

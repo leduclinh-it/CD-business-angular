@@ -8,9 +8,9 @@ import * as CONST from '../../core/constants';
 import {ReactiveFormsModule} from "@angular/forms";
 const routes: Routes = [
   {path: '', component: AuthComponent, children: [
+      {path: '', redirectTo: CONST.frontendUrl.LOGIN, pathMatch: 'full'},
       {path: CONST.frontendUrl.LOGIN, component: LoginComponent},
       {path: CONST.frontendUrl.REGISTER, component: RegisterComponent},
-      {path: '', redirectTo: CONST.frontendUrl.LOGIN, pathMatch: 'full'}
     ]}
 ];
 @NgModule({

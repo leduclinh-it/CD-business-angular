@@ -1,1 +1,47 @@
-<p>modal-add-product works!</p>
+<div class="card">
+  <div class="card-header">
+    <h4>Thêm sản phẩm</h4>
+  </div>
+  <div class="card-body">
+    <div class="row" [formGroup]="productForm">
+      <div class="col-md-6 ">
+        <div class="md-form">
+        <input mdbInput type="text" id="name" formControlName="name"  class="form-control" mdbValidate>
+        <label for="name" class="">Tên sản phẩm</label>
+        </div>
+      </div>
+      <div class="col-md-6 ">
+        <div class="md-form">
+
+        <input mdbInput type="text" id="price" formControlName="price"  class="form-control" mdbValidate>
+        <label for="price" class="">Giá</label>
+        </div>
+      </div>
+      <div class="col-md-6 ">
+        <div class="md-form">
+
+        <input mdbInput type="text" id="image" formControlName="image"  class="form-control" mdbValidate>
+        <label for="image" class="">Ảnh</label>
+        </div>
+      </div>
+      <div class="col-md-6 ">
+        <div class="md-form">
+          <select class="browser-default custom-select" formControlName="categoryId" >
+          <option *ngFor="let ctgr of categoryList" value="{{ctgr.id}}">{{ctgr.name}}</option>
+        </select>
+        </div>
+      </div>
+      <div class="col-md-12 ">
+        <div class="md-form">
+
+        <input mdbInput type="text" id="description" formControlName="description"  class="form-control" mdbValidate>
+        <label for="description" class="">Giới thiệu sản phẩm</label>
+        </div>
+      </div>
+
+    </div>
+  </div>
+  <div class="card-footer">
+    <button type="button"  class="float-right" size="sm" mdbBtn color="primary" mdbWavesEffect (click)="onAddProduct()">Thêm</button>
+  </div>
+</div>

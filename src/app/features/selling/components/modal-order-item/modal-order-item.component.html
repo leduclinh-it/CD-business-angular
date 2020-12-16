@@ -6,7 +6,8 @@
     <form [formGroup]="orderItemForm" class="card-body">
       <div class="row">
         <div class="col-md-4">
-          <img class="img-thumbnail" style="width: 100px" src="https://www.elleman.vn/wp-content/uploads/2018/12/26/phim-hanh-dong-elle-man-1-475x699.jpg">
+          <img class="img-thumbnail" *ngIf="!productDetail.image" style="width: 100px" src="https://www.elleman.vn/wp-content/uploads/2018/12/26/phim-hanh-dong-elle-man-1-475x699.jpg">
+          <img class="img-thumbnail" *ngIf="productDetail.image" style="width: 100px" src="{{productDetail.image}}">
         </div>
         <div class="col-md-5">
             <label>Mã sản phẩm</label>
@@ -47,6 +48,13 @@
     </form>
     </div>
     <div class="card-footer">
-      <button type="button" block="true" size="sm" mdbBtn color="primary" mdbWavesEffect [disabled]="this.orderItemForm.status === 'INVALID'" (click)="onAddOrder()">Thêm vào giỏ hàng</button>
+      <div class="row">
+        <div class="col" *ngIf="productDetail.products.length!=0">
+          <button type="button" block="true" size="sm" mdbBtn color="primary" mdbWavesEffect [disabled]="this.orderItemForm.status === 'INVALID'" (click)="onAddOrder()">Thêm vào giỏ hàng</button>
+        </div>
+        <div class="col" *ngIf="productDetail.products.length==0">
+          <button type="button" block="true" size="sm" mdbBtn color="success" (click)="onShowBookingModal()" mdbWavesEffect >Đặt trước</button>
+        </div>
+      </div>
     </div>
   </div>

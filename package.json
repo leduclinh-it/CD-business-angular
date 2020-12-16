@@ -42,6 +42,8 @@
     "@types/node": "^12.11.1",
     "codelyzer": "^6.0.0",
     "electron": "^11.0.3",
+    "electron-installer-dmg": "^3.0.0",
+    "electron-packager": "^15.1.0",
     "jasmine-core": "~3.5.0",
     "jasmine-spec-reporter": "~5.0.0",
     "karma": "~5.0.0",

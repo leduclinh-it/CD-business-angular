@@ -4,7 +4,7 @@ import {CartModel} from "../../../../core/models/cart.model";
 import {ProductService} from "../../../../core/services/product.service";
 import {DatePipe} from "@angular/common";
 import * as CONST from '../../../../core/constants';
-import {OrderModel} from "../../../../core/models/Order.model";
+import {OrderModel} from "../../../../core/models/order.model";
 import {CustomerService} from "../../../../core/services/customer.service";
 import {CustomerModel} from "../../../../core/models/customer.model";
 import {OrderService} from "../../../../core/services/order.service";
@@ -66,7 +66,11 @@ export class SellingComponent implements OnInit {
   }
   onCancel() {
     localStorage.removeItem(CONST.LocalStorage.CART);
+    this.codeCustomer = null;
+    this.employee = null;
+    this.customerName = null;
     this.getCart();
+    this.listProductComponent.getListProduct();
   }
   onRemove(index: number) {
     this.cart.orderItem.splice(index, 1);
@@ -100,7 +104,6 @@ export class SellingComponent implements OnInit {
     this.customerService.getCustomerByCode(this.codeCustomer).subscribe(res => {
       this.customer = res.customer;
       this.orders = res.orders;
-      console.log(this.orders)
       if (this.customer.code !=null) {
         this.customerName = this.customer.fullName;
         this.customerError = false;
@@ -125,7 +128,6 @@ export class SellingComponent implements OnInit {
 
     this.modalRef = this.modalService.show(ModalCustomerInfoComponent, modalOptions);
     this.modalRef.content.saveButtonClicked.subscribe( value =>{
-      console.log(value);
       this.getCustomerByCode();
       this.listProductComponent.getListProduct();
     })

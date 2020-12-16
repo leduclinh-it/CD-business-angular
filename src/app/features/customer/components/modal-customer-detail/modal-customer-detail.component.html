@@ -7,25 +7,25 @@
       <form class="row" >
         <div class="col-md-6">
           <div class="md-form">
-            <input mdbInput type="text" disabled id="fullName" [value]="customer.fullName" class="form-control" mdbValidate>
+            <input mdbInput type="text"  id="fullName" [value]="customer.fullName" class="form-control" mdbValidate>
             <label for="fullName" class="">Họ và tên</label>
           </div>
         </div>
         <div class="col-md-6">
           <div class="md-form">
-            <input mdbInput type="text" disabled id="phone" [value]="customer.phone" class="form-control" mdbValidate>
+            <input mdbInput type="text"  id="phone" [value]="customer.phone" class="form-control" mdbValidate>
             <label for="phone" class="">Số điện thoại</label>
           </div>
         </div>
         <div class="col-md-6">
           <div class="md-form">
-            <input mdbInput type="text" disabled id="address" [value]="customer.address" class="form-control" mdbValidate>
+            <input mdbInput type="text"  id="address" [value]="customer.address" class="form-control" mdbValidate>
             <label for="address" class="">Địa chỉ</label>
           </div>
         </div>
         <div class="col-md-6">
           <div class="md-form">
-            <input mdbInput type="text" disabled id="email" [value]="customer.email" class="form-control" mdbValidate>
+            <input mdbInput type="text"  id="email" [value]="customer.email" class="form-control" mdbValidate>
             <label for="email" class="">Địa chỉ Email</label>
           </div>
         </div>
@@ -91,7 +91,7 @@
           <td>{{pr.price}}.000đ</td>
           <td>{{pr.product.code}}</td>
           <td *ngIf="pr.status === 'ACTIVE'">
-            <button type="button" class="float-left" size="sm" mdbBtn color="warning" (click)="updateOrder(pr)" mdbWavesEffect>Thanh toán</button>
+            <button type="button" class="float-left" size="sm" mdbBtn color="warning" (click)="updateOrder(pr)" mdbWavesEffect>Hủy khoản phí</button>
           </td>
           <td *ngIf="pr.status === 'NO'">
             Đã thanh toán
@@ -99,6 +99,8 @@
         </tr>
         </tbody>
       </table>
+      <button type="button" class="float-left" size="sm" mdbBtn color="warning" mdbWavesEffect (click)="deleteCustomer(customer.id)">Xóa khách</button>
+      <button type="button" class="float-right" size="sm" mdbBtn color="success" mdbWavesEffect>Cập nhật thông tin</button>
     </div>
   </div>
 </div>

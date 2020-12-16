@@ -42,7 +42,7 @@
               <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">{{el.fullName}}</td>
               <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">{{el.phone}}</td>
               <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">{{el.code}}</td>
-              <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex" ><a><mdb-icon fas icon="pen"></mdb-icon></a></td>
+              <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex" ><a (click)="onGetDetailCustomer(el.code)"><mdb-icon fas icon="pen"></mdb-icon></a></td>
             </tr>
             </tbody>
             <tfoot class="grey lighten-5 w-100">
